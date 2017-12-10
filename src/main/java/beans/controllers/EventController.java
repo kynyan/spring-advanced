@@ -3,6 +3,7 @@ package beans.controllers;
 import beans.models.Auditorium;
 import beans.models.Event;
 import beans.services.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,8 @@ import java.util.List;
 
 @Controller
 public class EventController {
+    @Autowired
     private EventService eventService;
-
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
-    }
 
     @RequestMapping(method = RequestMethod.POST, path = "/event")
     public Event create(@RequestBody Event event) {

@@ -2,9 +2,12 @@ package beans.controllers;
 
 import beans.models.User;
 import beans.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,11 +16,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    @Autowired
     private UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(method = RequestMethod.POST, path = "/user")
     public User register(User user) {
@@ -41,7 +41,9 @@ public class UserController {
     }
 
     @RequestMapping(path = "/users/{name}")
-    public List<User> getUsersByName(@PathVariable("name") String name) {
-        return userService.getUsersByName(name);
+    public String getUsersByName(@PathVariable("name") String name,
+                                     @ModelAttribute("model") ModelMap model) {
+        model.addAttribute("users", userService.getUsersByName(name));
+        return "users";
     }
 }

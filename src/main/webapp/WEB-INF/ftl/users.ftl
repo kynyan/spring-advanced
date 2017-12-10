@@ -28,29 +28,20 @@ legend { font-weight: bold; }
 <body>
 <div id="header">
 <H2>
-	FreeMarker generated page
+	List of users
 </H2>
 </div>
 
 <div id="content">
 
-  <fieldset>
-  	<legend>Add Car</legend>
-  <form name="car" action="add" method="post">
-  	Make : <input type="text" name="make" />	<br/>
-  	Model: <input type="text" name="model" />	<br/>
-  	<input type="submit" value="   Save   " />
-  </form>
-  </fieldset>
-
   <br/>
   <table class="datatable">
   	<tr>
-  		<th>Make</th>  <th>Model</th>
+  		<th>User ID</th>  <th>Name</th> <th>Email</th> <th>Birthdate</th>
   	</tr>
-    <#list model["carList"] as car>
+    <#list model["users"] as user>
 	  	<tr>
-	  		<td>${car.make}</td> <td>${car.model}</td>
+	  		<td>${user.id}</td> <td>${user.name}</td> <td>${user.email}</td> <td>${user.birthday}</td>
 	  	</tr>
     </#list>
   </table>

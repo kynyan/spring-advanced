@@ -2,6 +2,7 @@ package beans.controllers;
 
 import beans.models.Auditorium;
 import beans.services.AuditoriumService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +11,8 @@ import java.util.List;
 
 @Controller
 public class AuditoriumController {
+    @Autowired
     private AuditoriumService auditoriumService;
-
-    public AuditoriumController(AuditoriumService auditoriumService) {
-        this.auditoriumService = auditoriumService;
-    }
 
     @RequestMapping(path = "/auditoriums")
     public List<Auditorium> getAuditoriums() {
