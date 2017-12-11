@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,14 +33,15 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @RequestMapping(path = "/user/{email}")
-    public User getUserByEmail(@PathVariable("email") String email) {
-        return userService.getUserByEmail(email);
+    @RequestMapping(path = "/user")
+    public String getUserByEmail(@RequestParam("email") String email, @ModelAttribute Model model) {
+        System.out.println("user: " + userService.getUserByEmail(email).getName());
+        model.addAttribute("user", userService.getUserByEmail(email));
+        return "user";
     }
 
     @RequestMapping(path = "/users/{name}")
-    public String getUsersByName(@PathVariable("name") String name,
-                                     @ModelAttribute("model") ModelMap model) {
+    public String getUsersByName(@PathVariable("name") String name, @ModelAttribute("model") ModelMap model) {
         model.addAttribute("users", userService.getUsersByName(name));
         return "users";
     }

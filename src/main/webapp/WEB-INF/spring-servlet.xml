@@ -1,8 +1,11 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <import resource="classpath:spring.xml" />
 
@@ -12,8 +15,10 @@
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="true"/>
-        <property name="prefix" value=""/>
+        <!--<property name="prefix" value="/WEB-INF/ftl/"/>-->
         <property name="suffix" value=".ftl"/>
     </bean>
+
+    <!--<mvc:view-controller path="/user" view-name="user"/>-->
 
 </beans>
